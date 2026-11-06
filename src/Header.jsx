@@ -9,7 +9,7 @@ export default function Header() {
       <nav className="main-nav" aria-label="Main navigation">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/plants">Plants</NavLink>
-        <NavLink to="/cart" className="cart-link">Cart <span className="cart-count">{count}</span></NavLink>
+        <NavLink to="/cart" className="cart-link" aria-label={`Shopping cart with ${count} items`}><span aria-hidden="true">🛒</span> Cart <span className="cart-count">{count}</span></NavLink>
       </nav>
     </header>
   )

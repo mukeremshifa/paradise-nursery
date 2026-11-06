@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { decreaseQuantity, increaseQuantity, removeFromCart } from './CartSlice'
+import { removeItem, updateQuantity } from './CartSlice'
 
 export default function CartItem() {
   const dispatch = useDispatch()
@@ -22,11 +22,11 @@ export default function CartItem() {
           <div className="cart-items">
             {items.map((item) => (
               <article className="cart-row" key={item.id}>
-                <img src={item.image} alt={item.name} />
-                <div className="cart-product"><p className="eyebrow">Plant / 0{items.indexOf(item) + 1}</p><h2>{item.name}</h2><p>${item.price} each</p></div>
-                <div className="quantity-control"><button aria-label={`Decrease ${item.name}`} onClick={() => dispatch(decreaseQuantity(item.id))}>−</button><span>{item.quantity}</span><button aria-label={`Increase ${item.name}`} onClick={() => dispatch(increaseQuantity(item.id))}>+</button></div>
+                <img className="cart-product-image" src={item.image} alt={item.name} />
+                <div className="cart-product"><p className="eyebrow">Plant / 0{items.indexOf(item) + 1}</p><h2 className="cart-product-name">{item.name}</h2><p className="cart-product-price">${item.price} each</p></div>
+                <div className="quantity-control"><button aria-label={`Decrease ${item.name}`} onClick={() => item.quantity === 1 ? dispatch(removeItem(item.id)) : dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))}>−</button><span>{item.quantity}</span><button aria-label={`Increase ${item.name}`} onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}>+</button></div>
                 <strong className="line-total">${(item.price * item.quantity).toFixed(2)}</strong>
-                <button className="delete-button" aria-label={`Remove ${item.name}`} onClick={() => dispatch(removeFromCart(item.id))}>×</button>
+                <button className="delete-button" aria-label={`Remove ${item.name}`} onClick={() => dispatch(removeItem(item.id))}>×</button>
               </article>
             ))}
           </div>

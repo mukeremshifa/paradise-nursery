@@ -10,7 +10,7 @@ function LandingPage() {
       <div className="landing-overlay">
         <div className="landing-content">
           <p className="eyebrow light">A greener way to live</p>
-          <h1>Paradise<br /><em>Nursery</em></h1>
+          <h1>Welcome to<br /><em>Paradise Nursery</em></h1>
           <AboutUs />
           <Link className="primary-button" to="/plants">Get started <span>→</span></Link>
         </div>
